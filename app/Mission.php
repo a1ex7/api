@@ -1,6 +1,6 @@
 <?php
 
-namespace App/Mission;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class Mission extends Model {
 		return $this->hasMany('Target');
 	}
 
-	public function mission()
+	public function mission2()
 	{
 		return $this->hasMany('Employee');
 	}

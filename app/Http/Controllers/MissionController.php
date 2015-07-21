@@ -1,6 +1,14 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-class MissionController extends Controller {
+namespace App\Http\Controllers;
+
+use App\Mission;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+class MissionController extends Controller
+{
 
   /**
    * Display a listing of the resource.
@@ -9,7 +17,9 @@ class MissionController extends Controller {
    */
   public function index()
   {
-    
+      $missions = Mission::all();
+
+      return view('missions', ['missions'=>$missions]);
   }
 
   /**
@@ -19,7 +29,7 @@ class MissionController extends Controller {
    */
   public function create()
   {
-    
+      return view('missions');
   }
 
   /**
@@ -77,5 +87,3 @@ class MissionController extends Controller {
   }
   
 }
-
-?>

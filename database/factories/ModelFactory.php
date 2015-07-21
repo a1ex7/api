@@ -11,11 +11,16 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+$factory->define(App\Mission::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'title' => $faker->word,
+        'status' => $faker->randomElement(['planned', 'executed', 'completed', 'canceled']),
+    ];
+});
+
+$factory->define(App\Target::class, function ($faker) {
+    return [
+        'type' => $faker->word,
+        'status' => $faker->randomElement(['planned', 'performed', 'achieved', 'canceled']),
     ];
 });

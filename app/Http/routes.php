@@ -13,10 +13,18 @@
 
 Route::get('/', function()
 {
-	return View::make('welcome');
+	return View::make('index');
 });
 
 
-Route::resource('mission', 'MissionController');
-Route::resource('target', 'TargetController');
-Route::resource('employee', 'EmployeeController');
+Route::resource('missions', 'MissionController');
+Route::resource('targets', 'TargetController');
+Route::resource('employees', 'EmployeeController');
+
+Route::group( ['prefix' => 'api/v1'], function()
+{
+    Route::resource('missions', 'Api\MissionController');
+    Route::resource('targets', 'Api\TargetController');
+    Route::resource('employees', 'Api\EmployeeController');
+
+});
