@@ -14,8 +14,8 @@ Params: type, status:['planned', 'executed', 'completed', 'canceled']```
 
 Новый работник:
 
-POST /api/v1/missions/{id}/employees
-Params: name, position
+```POST /api/v1/missions/{id}/employees
+Params: name, position```
 
 Существующий работник
 PUT /api/v1/missions/{mid}/employees/{eid}
