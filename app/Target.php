@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Target extends Model {
 
 	protected $table = 'targets';
-	public $timestamps = true;
+	public $timestamps = false;
+
+    public function mission()
+    {
+        return $this->belongsTo('App\Mission');
+    }
 
 }

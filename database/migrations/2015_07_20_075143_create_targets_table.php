@@ -12,7 +12,7 @@ class CreateTargetsTable extends Migration {
 			$table->string('type');
 			$table->enum('status', array('planned', 'performed', 'achieved', 'canceled'));
 			$table->integer('mission_id')->unsigned();
-			$table->timestamps();
+//			$table->timestamps();
 		});
 	}
 

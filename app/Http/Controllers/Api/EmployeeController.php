@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Employee;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class EmployeeController extends Controller
 {
@@ -16,7 +18,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+        return Response::json($employees);
     }
 
     /**
@@ -48,7 +51,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employees = Employee::findOrNew($id);
+        return Response::json($employees);
     }
 
     /**

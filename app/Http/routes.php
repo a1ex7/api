@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('index');
+	return View::make('welcome');
 });
 
 
@@ -26,5 +26,17 @@ Route::group( ['prefix' => 'api/v1'], function()
     Route::resource('missions', 'Api\MissionController');
     Route::resource('targets', 'Api\TargetController');
     Route::resource('employees', 'Api\EmployeeController');
+
+    Route::get('missions/{id}/targets', 'Api\RestController@getMissionTargets');
+    Route::post('missions/{id}/targets', 'Api\RestController@postMissionTarget');
+
+    Route::get('missions/{mid}/targets/{tid}', 'Api\RestController@getMissionTarget');
+
+    Route::get('missions/{id}/employees', 'Api\RestController@getMissionEmployees');
+    Route::post('missions/{id}/employees', 'Api\RestController@postMissionEmployee');
+
+    Route::get('missions/{mid}/employees/{eid}', 'Api\RestController@getMissionEmployee');
+    Route::put('missions/{mid}/employees/{eid}', 'Api\RestController@putMissionEmployee');
+    Route::put('missions/{id}/cancel', 'Api\RestController@putCancelMission');
 
 });

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class MissionController extends Controller
 {
@@ -34,14 +35,30 @@ class MissionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created mission in storage and return it.
      *
      * @param  Request  $request
      * @return Response
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'title' => 'required',
+            'status' => 'exists:missions,status',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Response::json($validator->messages(), 500);
+        }
+        else {
+            $mission = new Mission();
+            $mission->title = $request->title;
+            $mission->status = $request->status;
+            $mission->save();
+            return Response::json($mission);
+        }
     }
 
     /**
@@ -76,7 +93,33 @@ class MissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            //'title' => 'required',
+            'status' => 'exists:missions,status',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Response::json($validator->messages(), 500);
+        }
+        else {
+            $mission = Mission::findOrNew($id);
+
+            if ($request->title) {
+                $mission->title = $request->title;
+            }
+            $mission->status = $request->status;
+            $mission->save();
+
+            if ($mission->status == 'completed' OR $mission->status == 'canceled')
+            {
+                //Free employees if mission canceling or completed
+                $mission->employees()->update(['mission_id' => null]);
+            }
+
+            return Response::json($mission);
+        }
     }
 
     /**

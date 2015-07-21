@@ -7,16 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Mission extends Model {
 
 	protected $table = 'missions';
-	public $timestamps = true;
+	public $timestamps = false;
 
-	public function mission()
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['title', 'status'];
+
+	public function targets()
 	{
-		return $this->hasMany('Target');
+		return $this->hasMany('App\Target');
 	}
 
-	public function mission2()
+	public function employees()
 	{
-		return $this->hasMany('Employee');
+		return $this->hasMany('App\Employee');
 	}
 
 }

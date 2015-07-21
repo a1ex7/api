@@ -11,7 +11,7 @@ class CreateMissionsTable extends Migration {
 			$table->increments('id');
 			$table->string('title');
 			$table->enum('status', array('planned', 'executed', 'completed', 'canceled'));
-			$table->timestamps();
+//			$table->timestamps();
 		});
 	}
 

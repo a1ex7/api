@@ -11,7 +11,7 @@ class CreateEmployeesTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('position');
-			$table->integer('mission_id')->unsigned();
+			$table->integer('mission_id')->unsigned()->nullable();
 		});
 	}
 
