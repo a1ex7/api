@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - academy_api@localhost" uuid="596b5c22-0ce7-4de5-8391-77c89488e079">
+    <database-info product="MySQL" version="5.5.41-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="academy_api"/>
+    <table name="employees" schema="" catalog="academy_api" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="mission_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="employees_mission_id_foreign" columns="mission_id" ref-table="missions" ref-schema="" ref-catalog="academy_api" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="employees_mission_id_foreign" unique="false" columns="mission_id"/>
+    </table>
+    <table name="migrations" schema="" catalog="academy_api" type="TABLE">
+      <column name="migration" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="batch" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="missions" schema="" catalog="academy_api" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="ENUM" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="employees_mission_id_foreign" table="employees" schema="" catalog="academy_api" columns="mission_id"/>
+      <exported-key name="targets_mission_id_foreign" table="targets" schema="" catalog="academy_api" columns="mission_id"/>
+    </table>
+    <table name="targets" schema="" catalog="academy_api" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="type" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="ENUM" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="mission_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="targets_mission_id_foreign" columns="mission_id" ref-table="missions" ref-schema="" ref-catalog="academy_api" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="targets_mission_id_foreign" unique="false" columns="mission_id"/>
+    </table>
+  </data-source>
+</component>
