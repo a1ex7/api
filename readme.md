@@ -1,27 +1,47 @@
-## Laravel PHP Framework
+## Laravel REST API hometask
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Создание новой миссии
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+POST /api/v1/missions
+Params: title
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Создание списка целей миссии
 
-## Official Documentation
+POST /api/v1/missions/{id}/targets
+Params: type, status:['planned', 'executed', 'completed', 'canceled']
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Выделение персонала для миссии;
 
-## Contributing
+Новый работник:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+POST /api/v1/missions/{id}/employees
+Params: name, position
 
-## Security Vulnerabilities
+Существующий работник
+PUT /api/v1/missions/{mid}/employees/{eid}
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Управление целями миссии: запланировать новую цель, начать выполнение, закончить, отменить, если всезадачи выполнены, миссия также считается выполенной;
 
-### License
+PUT /api/v1/targets/{id}
+Params: status:['planned', 'executed', 'completed', 'canceled']
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Отмена мисии, при отмене мисии все незаконченые цели отменяются;
+
+PUT /api/v1/missions/{id}/cancel
+или
+PUT /api/v1/missions/{id}
+with Param: status='canceled'
+
+## При завершении и отмене мисии, весь персонал освобождается.
+PUT /api/v1/missions/{id}
+Param: status:['canceled','achieved']
+
+## Также работают общие методы просмотра сущностей и коллекций
+
+GET /api/v1/missions
+GET /api/v1/missions/{id}
+GET /api/v1/missions/{id}/targets
+GET /api/v1/missions/{mid}/targets/{tid}
+GET /api/v1/missions/{id}/employees
+GET /api/v1/missions/{mid}/employees/{eid}
+

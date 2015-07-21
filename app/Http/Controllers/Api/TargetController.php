@@ -97,7 +97,8 @@ class TargetController extends Controller
             $target->status = $request->status;
             $target->save();
 
-            if ($this->isAllTargetsPerformed($mission)){
+            // If all targets was achieve, parent mission will be completed
+            if ($this->isAllTargetsAchieved($mission)){
                 $mission->update(['status' => 'completed']);
             };
 
@@ -105,14 +106,14 @@ class TargetController extends Controller
         }
     }
 
-    protected function isAllTargetsPerformed(Mission $mission)
+    protected function isAllTargetsAchieved(Mission $mission)
     {
         $targets = $mission->targets()->get();
-        $performed_targets_count = $targets->filter(function($item) {
-            return $item->status == 'performed';
+        $achieved_targets_count = $targets->filter(function($item) {
+            return $item->status == 'achieved';
         })->count();
         $all_targets_count = $targets->count();
-        return ($performed_targets_count == $all_targets_count);
+        return ($achieved_targets_count == $all_targets_count);
     }
 
     /**
